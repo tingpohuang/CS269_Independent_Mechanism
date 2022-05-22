@@ -15,7 +15,7 @@ class Expert(nn.Module):
             layers.append(nn.LeakyReLU(0.2, inplace=True))
             return layers
 
-        if self.args.dataset == 'MNIST':
+        if self.args.dataset == 'mnist':
             self.model = nn.Sequential(
                 *block(self.args.input_size, 128, normalize=False),
                 *block(128, 256),
@@ -44,7 +44,7 @@ class Discriminator(nn.Module):
         self.args = args
 
         # Architecture
-        if self.args.dataset == 'MNIST':
+        if self.args.dataset == 'mnist':
             print("I am here")
             self.model = nn.Sequential(
                 nn.Linear(self.args.input_size, 512),

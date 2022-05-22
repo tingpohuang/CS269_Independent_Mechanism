@@ -171,7 +171,7 @@ if __name__ == '__main__':
                         help='path to the directory that contains the data')
     parser.add_argument('--outdir', default='.', type=str,
                         help='path to the output directory')
-    parser.add_argument('--dataset', default='MNIST', type=str,
+    parser.add_argument('--dataset', default='mnist', type=str,
                         help='name of the dataset')
     parser.add_argument('--optimizer_experts', default='adam', type=str,
                         help='optimization algorithm (options: sgd | adam, default: adam)')
@@ -251,7 +251,11 @@ if __name__ == '__main__':
     # Load dataset
     # print("tim")
     # print(dir(datasets_torch))
-    if args.dataset in dir(datasets_torch):
+    if args.dataset == "mnist":
+        dataset_train = getattr(importlib.import_module(
+            '{}'.format(args.dataset)), 'MNISTDataset')(args)
+
+    elif args.dataset in dir(datasets_torch):
         # Pytorch dataset
         dataset = getattr(datasets_torch, args.dataset)
         train_transform = transforms.Compose([transforms.ToTensor()])

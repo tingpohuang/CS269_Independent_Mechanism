@@ -20,6 +20,7 @@ class MNISTDataset(Dataset):
         x_after = np.array(self.after_data.iloc[index])
         x_before = torch.FloatTensor(x_before)
         x_after = torch.FloatTensor(x_after)
+        print(x_before.size())
         return (x_before, x_after)
 
     def __len__(self):
